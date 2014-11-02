@@ -3,11 +3,19 @@ slackcmd
 
 A Python script for piping output from the command line to a Slack channel
 
+An example:
+
+```
+ls | python slackcmd.py -c '#myChannel' -u https://pzelnip.slack.com/services/hooks/incoming-webhook?token=Ta4BRUMStaB5ahT4Y76eT1Hi'
+```
+
+Would pipe the contents of the current directory to the channel ```#myChannel```.
+
 ```
 Usage:
 
 $ python slackcmd.py  -h
-usage: slackcmd.py [-h] [-u URL] -c CHANNEL [-n USER] [-e EMOJI]
+usage: slackcmd.py [-h] -u URL -c CHANNEL [-n USER] [-e EMOJI]
 
 Talk to Slack
 
