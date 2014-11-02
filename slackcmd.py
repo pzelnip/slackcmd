@@ -19,8 +19,7 @@ def post_to_slack(url, text, channel, user, emoji):
 
 def parse_args():
     parser = argparse.ArgumentParser(description='Talk to Slack')
-    parser.add_argument('-u','--url', help='Slack Incoming Webhooks integration webhook URL', required=False, 
-        default='https://pzelnip.slack.com/services/hooks/incoming-webhook?token=Ta4BRUMStaB5ahT4Y76eT1Hi')
+    parser.add_argument('-u','--url', help='Slack Incoming Webhooks integration webhook URL', required=True) 
     parser.add_argument('-c','--channel', help='Channel to post to', required=True)
     parser.add_argument('-n','--user', help='Name of the user to post as', required=False, default='CmdLine')
     parser.add_argument('-e','--emoji', help='Emoji to use for the message', 
