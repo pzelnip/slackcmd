@@ -1,10 +1,15 @@
 import argparse
 import json
+import os
 import sys 
 
 import requests # pip install requests if you don't have it
 
-    
+
+DEFAULT_USER_NAME = 'CmdLine'
+WEBHOOK_ENV_VAR_NAME = 'SLACK_WEBHOOK_URL'
+
+
 def post_to_slack(url, text, channel, user, emoji): 
     headers = {'content-type':'application/json'}
     payload = json.dumps({
@@ -29,10 +34,16 @@ def post_to_slack(url, text, channel, user, emoji):
 
 
 def parse_args():
+    # try getting Webhook url from env variable
+    webhook_url = os.environ.get(WEBHOOK_ENV_VAR_NAME, None)
+
     parser = argparse.ArgumentParser(description='Talk to Slack')
-    parser.add_argument('-u','--url', help='Slack Incoming Webhooks integration webhook URL', required=True) 
+    parser.add_argument('-u','--url', 
+        help='Slack Incoming Webhooks integration webhook URL.  If the environment variable %s is set, will read this value from there' % WEBHOOK_ENV_VAR_NAME, required=webhook_url is None, 
+        default=webhook_url) 
     parser.add_argument('-c','--channel', help='Channel to post to', required=True)
-    parser.add_argument('-n','--user', help='Name of the user to post as', required=False, default='CmdLine')
+    parser.add_argument('-n','--user', help='Name of the user to post as, defaults to "%s"' % DEFAULT_USER_NAME, 
+        required=False, default=DEFAULT_USER_NAME)
     parser.add_argument('-e','--emoji', help='Emoji to use for the message', 
         required=False, default=':rocket:')
 
