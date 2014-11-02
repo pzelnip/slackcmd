@@ -2,7 +2,7 @@ import argparse
 import json
 import sys 
 
-import requests  # pip install requests
+import requests # pip install requests if you don't have it
 
     
 def post_to_slack(url, text, channel, user, emoji): 
@@ -13,9 +13,20 @@ def post_to_slack(url, text, channel, user, emoji):
             'text' : text,
             'icon_emoji' : emoji, 
     })
+
+    # if you don't want the dependency on the requests library, you can use the
+    # standard library here:
+    # import urllib2
+    #request = urllib2.Request(url, payload, headers) 
+    #f = urllib2.urlopen(request)
+    #response = f.read()
+    #f.close() 
+    # print response
+
+    # but requests is much nicer, particulary if there's an error
     request = requests.post(url, headers=headers, data=payload)
     print "Response: %s - %s" % (request.status_code, request.reason)
-    
+
 
 def parse_args():
     parser = argparse.ArgumentParser(description='Talk to Slack')
