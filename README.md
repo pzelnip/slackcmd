@@ -40,4 +40,10 @@ SLACK_WEBHOOK_URL="https://pzelnip.slack.com/services/hooks/incoming-webhook?tok
 export SLACK_WEBHOOK_URL
 ```
 
-To your ```.bashrc``` would do the trick.
+To your ```.bashrc``` would do the trick.  On a Windows box, opening up a command prompt and doing something like:
+
+```
+set SLACK_WEBHOOK_URL=https://pzelnip.slack.com/services/hooks/incoming-webhook?token=Ta4BRUMStaB5ahT4Y76eT1Hi
+```
+
+would work.
