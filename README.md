@@ -1,15 +1,26 @@
-slackcmd
-========
+# slackcmd
 
-A Python script for piping output from the command line to a Slack channel
+A Python script for piping output from the command line to a [Slack](http://slack.com) channel.
 
-An example:
+## Example
 
 ```
 ls | python slackcmd.py -c '#myChannel' 
 ```
 
 Would pipe the contents of the current directory to the channel ```#myChannel```.
+
+## Installation
+
+Just throw the slackcmd.py script somewhere in your path, and make sure the [```requests``` library for Python](http://docs.python-requests.org/en/latest/) is installed.  If you have ```pip```, then it's as easy as:
+
+```
+pip install requests
+```
+
+Alternatively, in the code there is commented out equivalent standard library implementations, but this isn't really supported or tested.
+
+## Usage
 
 ```
 usage: slackcmd.py [-h] [-u URL] -c CHANNEL [-n USER] [-e EMOJI]
