@@ -29,7 +29,10 @@ optional arguments:
 ```
 
 To find your webhooks URL, in Slack add the "Incoming Webhooks" integration, and in 
-the instructions will be given a "Webhook URL".  This is the URL to use.
+the instructions will be given a "Webhook URL".  This is the URL to use.  Here's a
+screenshot showing where to get it:
+
+![screenshot](screenshot.png)
 
 You can either specify this URL on the command-line via the -u switch, but it's much 
 more convenient to set the ```SLACK_WEBHOOK_URL``` environment variable.  On a *nix
