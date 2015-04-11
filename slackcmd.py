@@ -10,7 +10,7 @@ DEFAULT_USER_NAME = 'CmdLine'
 WEBHOOK_ENV_VAR_NAME = 'SLACK_WEBHOOK_URL'
 
 
-def post_to_slack(url, text, channel, user, emoji): 
+def post_to_slack(url, text, channel, user, emoji, quiet):
     headers = {'content-type':'application/json'}
     payload = json.dumps({
             'channel' : channel,
@@ -30,7 +30,11 @@ def post_to_slack(url, text, channel, user, emoji):
 
     # but requests is much nicer, particulary if there's an error
     request = requests.post(url, headers=headers, data=payload)
-    print "Response: %s - %s" % (request.status_code, request.reason)
+    if request.status_code == 200 and quiet :
+        # suppress output on successful post
+        pass
+    else :
+        print "Response: %s - %s" % (request.status_code, request.reason)
 
 
 def parse_args():
@@ -46,6 +50,8 @@ def parse_args():
         required=False, default=DEFAULT_USER_NAME)
     parser.add_argument('-e','--emoji', help='Emoji to use for the message', 
         required=False, default=':rocket:')
+    parser.add_argument('-q','--quiet', help='Work quietly if post successful',
+        action='store_true')
 
     args = vars(parser.parse_args())
 
@@ -65,7 +71,7 @@ def parse_args():
 def main():
     args = parse_args()
     text = sys.stdin.read()
-    post_to_slack(args['url'], text, args['channel'], args['user'], args['emoji'])
+    post_to_slack(args['url'], text, args['channel'], args['user'], args['emoji'], args['quiet'])
 
 
 if __name__ == "__main__":
